@@ -75,4 +75,4 @@ gem "pundit"
 
 # json 3.x made JSON.parse's options keyword-only; ActiveSupport 8.1.3.1 still
 # passes them positionally, which breaks every encrypted cookie read.
-gem "json", "< 3"
+gem "json", "< 4"
