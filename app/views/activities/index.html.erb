@@ -1,0 +1,11 @@
+<% content_for :title, "Aktivitäten – CasaPlan" %>
+
+<h1 class="page-title">Aktivitäten</h1>
+
+<div class="card">
+  <% if @activities.any? %>
+    <%= render partial: "activities/activity", collection: @activities, locals: { show_stay_link: true } %>
+  <% else %>
+    <p>Noch keine Aktivitäten.</p>
+  <% end %>
+</div>

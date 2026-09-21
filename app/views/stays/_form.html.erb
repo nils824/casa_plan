@@ -1,0 +1,38 @@
+<%= render "shared/errors", record: stay %>
+
+<div class="card">
+  <%= form_with model: stay do |f| %>
+    <% if stay.persisted? %>
+      <%= f.hidden_field :lock_version %>
+    <% end %>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="field">
+        <%= f.label :arrival_on, class: "label" %>
+        <%= f.date_field :arrival_on, required: true, class: "input" %>
+      </div>
+      <div class="field">
+        <%= f.label :departure_on, class: "label" %>
+        <%= f.date_field :departure_on, required: true, class: "input" %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :guests_count, class: "label" %>
+      <%= f.number_field :guests_count, required: true, min: 1, max: stay.house&.beds, class: "input" %>
+      <% if stay.house %>
+        <p class="text-sm text-stone-500 mt-1">Das Haus hat <%= stay.house.beds %> Betten.</p>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :note, class: "label" %>
+      <%= f.text_area :note, rows: 3, class: "input" %>
+    </div>
+
+    <div class="flex gap-3">
+      <%= f.submit submit_label, class: "btn-primary" %>
+      <%= link_to "Abbrechen", cancel_path, class: "btn-secondary" %>
+    </div>
+  <% end %>
+</div>

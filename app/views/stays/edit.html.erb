@@ -1,0 +1,5 @@
+<% content_for :title, "Anfrage bearbeiten – CasaPlan" %>
+
+<h1 class="page-title">Anfrage bearbeiten</h1>
+
+<%= render "form", stay: @stay, submit_label: "Speichern", cancel_path: stay_path(@stay) %>

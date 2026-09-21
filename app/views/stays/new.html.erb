@@ -1,0 +1,10 @@
+<% content_for :title, "Aufenthalt anfragen – CasaPlan" %>
+
+<h1 class="page-title">Aufenthalt anfragen</h1>
+
+<p class="mb-4 text-stone-600">
+  Der Zeitraum darf sich nicht mit einem bestätigten Aufenthalt überschneiden.
+  Eine Abreise und eine Anreise am selben Tag sind erlaubt.
+</p>
+
+<%= render "form", stay: @stay, submit_label: "Anfrage senden", cancel_path: stays_path %>

@@ -1,0 +1,66 @@
+<% content_for :title, "Aufenthalt – CasaPlan" %>
+
+<div class="flex items-center gap-3 mb-6">
+  <h1 class="text-3xl font-bold">Aufenthalt <%= @stay.period_label %></h1>
+  <%= status_badge(@stay) %>
+</div>
+
+<%= render "shared/errors", record: @stay %>
+
+<div class="card">
+  <dl class="grid grid-cols-[max-content_1fr] gap-x-6 gap-y-2">
+    <dt class="font-semibold">Partei</dt>
+    <dd><%= @stay.user.name %></dd>
+    <dt class="font-semibold">Zeitraum</dt>
+    <dd><%= @stay.period_label %> (<%= pluralize(@stay.nights, "Nacht", plural: "Nächte") %>)</dd>
+    <dt class="font-semibold">Personen</dt>
+    <dd><%= @stay.guests_count %></dd>
+    <% if @stay.note.present? %>
+      <dt class="font-semibold">Bemerkung</dt>
+      <dd><%= @stay.note %></dd>
+    <% end %>
+    <% if @stay.decided_by.present? %>
+      <dt class="font-semibold">Entschieden von</dt>
+      <dd><%= @stay.decided_by.name %>, <%= l(@stay.decided_at, format: :short) %></dd>
+    <% end %>
+    <% if @stay.rejected? %>
+      <dt class="font-semibold">Ablehnungsgrund</dt>
+      <dd><%= @stay.rejection_reason %></dd>
+    <% end %>
+  </dl>
+
+  <% if @stay.requested? %>
+    <div class="flex flex-wrap gap-3 mt-5">
+      <% if policy(@stay).edit? %>
+        <%= link_to "Bearbeiten", edit_stay_path(@stay), class: "btn-secondary" %>
+      <% end %>
+      <% if policy(@stay).withdraw? %>
+        <%= button_to "Zurückziehen", withdraw_stay_path(@stay), method: :patch, class: "btn-secondary",
+                      form: { data: { turbo_confirm: "Anfrage wirklich zurückziehen?" } } %>
+      <% end %>
+      <% if policy(@stay).confirm? %>
+        <%= button_to "Bestätigen", confirm_stay_path(@stay), method: :patch, class: "btn-primary" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<% if @stay.requested? && policy(@stay).reject? %>
+  <div class="card">
+    <h2 class="section-title">Anfrage ablehnen</h2>
+    <%= form_with url: reject_stay_path(@stay), method: :patch, scope: :stay do |f| %>
+      <div class="field">
+        <%= f.label :rejection_reason, "Begründung", class: "label" %>
+        <%= f.text_area :rejection_reason, rows: 2, required: true, value: @stay.rejection_reason, class: "input" %>
+      </div>
+      <%= f.submit "Ablehnen", class: "btn-danger" %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="card">
+  <h2 class="section-title">Verlauf</h2>
+  <%= render partial: "activities/activity", collection: @activities, locals: { show_stay_link: false } %>
+</div>
+
+<%= link_to "Zurück zum Belegungsplan", stays_path, class: "link" %>

@@ -1,27 +1,28 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Dates are relative to today so the fixtures never end up in the past.
 
-one:
-  house: one
-  user: one
-  decided_by: one
-  arrival_on: 2026-09-21
-  departure_on: 2026-09-21
-  guests_count: 1
-  status: MyString
-  note: MyText
-  rejection_reason: MyText
-  decided_at: 2026-09-21 08:53:40
-  lock_version: 1
+anna_confirmed:
+  house: casa
+  user: anna
+  decided_by: manager
+  arrival_on: <%= Date.current + 14 %>
+  departure_on: <%= Date.current + 21 %>
+  guests_count: 4
+  status: confirmed
+  decided_at: <%= Time.current.to_fs(:db) %>
 
-two:
-  house: two
-  user: two
-  decided_by: two
-  arrival_on: 2026-09-21
-  departure_on: 2026-09-21
-  guests_count: 1
-  status: MyString
-  note: MyText
-  rejection_reason: MyText
-  decided_at: 2026-09-21 08:53:40
-  lock_version: 1
+ben_requested:
+  house: casa
+  user: ben
+  arrival_on: <%= Date.current + 30 %>
+  departure_on: <%= Date.current + 35 %>
+  guests_count: 2
+  status: requested
+
+# Overlaps ben_requested: only one of the two can be confirmed.
+anna_overlapping_request:
+  house: casa
+  user: anna
+  arrival_on: <%= Date.current + 33 %>
+  departure_on: <%= Date.current + 37 %>
+  guests_count: 3
+  status: requested

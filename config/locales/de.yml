@@ -1,0 +1,62 @@
+de:
+  activerecord:
+    models:
+      user: Benutzer
+      stay: Aufenthalt
+      house: Haus
+      activity: Aktivität
+    attributes:
+      user:
+        name: Name
+        email_address: E-Mail-Adresse
+        password: Passwort
+        password_confirmation: Passwort-Bestätigung
+        password_challenge: Aktuelles Passwort
+        unconfirmed_email: Neue E-Mail-Adresse
+        role: Rolle
+      stay:
+        arrival_on: Anreise
+        departure_on: Abreise
+        guests_count: Anzahl Personen
+        note: Bemerkung
+        status: Status
+        rejection_reason: Ablehnungsgrund
+        decided_by: Entschieden von
+        decided_at: Entschieden am
+      house:
+        name: Name
+        beds: Betten
+        invitation_code: Einladungscode
+      activity:
+        event: Ereignis
+        summary: Zusammenfassung
+
+  stay_statuses:
+    requested: Angefragt
+    confirmed: Bestätigt
+    rejected: Abgelehnt
+    withdrawn: Zurückgezogen
+
+  user_roles:
+    member: Familienmitglied
+    manager: Verwalter
+
+  activity_events:
+    requested: hat einen Aufenthalt angefragt
+    updated: hat eine Anfrage bearbeitet
+    withdrawn: hat eine Anfrage zurückgezogen
+    confirmed: hat einen Aufenthalt bestätigt
+    rejected: hat eine Anfrage abgelehnt
+
+  pundit:
+    default: Dafür hast du keine Berechtigung.
+    stay_policy:
+      edit?: Du kannst nur deine eigenen, noch offenen Anfragen bearbeiten.
+      update?: Du kannst nur deine eigenen Anfragen bearbeiten.
+      withdraw?: Du kannst nur deine eigenen, noch offenen Anfragen zurückziehen.
+      confirm?: Nur der Verwalter kann Anfragen bestätigen.
+      reject?: Nur der Verwalter kann Anfragen ablehnen.
+    user_policy:
+      index?: Nur der Verwalter hat Zugriff auf die Benutzerverwaltung.
+      edit?: Nur der Verwalter kann Benutzer bearbeiten.
+      update?: Nur der Verwalter kann Benutzer bearbeiten.

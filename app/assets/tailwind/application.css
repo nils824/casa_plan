@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+@layer components {
+  .btn-primary {
+    @apply inline-block rounded-md px-4 py-2 font-medium cursor-pointer text-center bg-teal-700 text-white hover:bg-teal-600;
+  }
+  .btn-secondary {
+    @apply inline-block rounded-md px-4 py-2 font-medium cursor-pointer text-center bg-white text-stone-700 border border-stone-300 hover:bg-stone-100;
+  }
+  .btn-danger {
+    @apply inline-block rounded-md px-4 py-2 font-medium cursor-pointer text-center bg-red-700 text-white hover:bg-red-600;
+  }
+  .input {
+    @apply block w-full rounded-md border border-stone-300 px-3 py-2 mt-1 focus:outline-teal-700;
+  }
+  .label {
+    @apply block text-sm font-medium text-stone-700;
+  }
+  .field {
+    @apply mb-4;
+  }
+  .card {
+    @apply bg-white rounded-lg border border-stone-200 p-5 mb-6;
+  }
+  .page-title {
+    @apply text-3xl font-bold mb-6;
+  }
+  .section-title {
+    @apply text-xl font-semibold mb-3;
+  }
+  .link {
+    @apply text-teal-700 underline hover:no-underline;
+  }
+  .table {
+    @apply w-full text-left text-sm;
+  }
+  .table th {
+    @apply py-2 pr-4 font-semibold text-stone-600 border-b border-stone-200;
+  }
+  .table td {
+    @apply py-2 pr-4 border-b border-stone-100 align-top;
+  }
+}

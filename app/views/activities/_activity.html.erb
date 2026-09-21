@@ -1,0 +1,8 @@
+<div id="<%= dom_id(activity) %>" class="py-2 border-b border-stone-100 last:border-0">
+  <span class="text-sm text-stone-500"><%= l(activity.created_at, format: :short) %></span><br>
+  <strong><%= activity.user.name %></strong> <%= activity.description %>:
+  <%= activity.summary %>
+  <% if show_stay_link %>
+    (<%= activity.stay.user.name %>) – <%= link_to "Details", activity.stay, class: "link" %>
+  <% end %>
+</div>

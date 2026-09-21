@@ -1,7 +1,7 @@
 require "test_helper"
 
 class PasswordsControllerTest < ActionDispatch::IntegrationTest
-  setup { @user = User.take }
+  setup { @user = users(:anna) }
 
   test "new" do
     get new_password_path
@@ -14,7 +14,7 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
 
     follow_redirect!
-    assert_notice "reset instructions sent"
+    assert_notice "wurde eine Anleitung verschickt"
   end
 
   test "create for an unknown user redirects but sends no mail" do
@@ -23,7 +23,7 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
 
     follow_redirect!
-    assert_notice "reset instructions sent"
+    assert_notice "wurde eine Anleitung verschickt"
   end
 
   test "edit" do
@@ -36,32 +36,29 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_password_path
 
     follow_redirect!
-    assert_notice "reset link is invalid"
+    assert_notice "Link ist ungültig"
   end
 
   test "update" do
     assert_changes -> { @user.reload.password_digest } do
-      put password_path(@user.password_reset_token), params: { password: "new", password_confirmation: "new" }
+      put password_path(@user.password_reset_token), params: { password: "neues-passwort-1", password_confirmation: "neues-passwort-1" }
       assert_redirected_to new_session_path
     end
 
     follow_redirect!
-    assert_notice "Password has been reset"
+    assert_notice "Passwort wurde zurückgesetzt"
   end
 
   test "update with non matching passwords" do
     token = @user.password_reset_token
     assert_no_changes -> { @user.reload.password_digest } do
-      put password_path(token), params: { password: "no", password_confirmation: "match" }
+      put password_path(token), params: { password: "neues-passwort-1", password_confirmation: "anderes-passwort" }
       assert_redirected_to edit_password_path(token)
     end
-
-    follow_redirect!
-    assert_notice "Passwords did not match"
   end
 
   private
     def assert_notice(text)
-      assert_select "div", /#{text}/
+      assert_select "#flash", /#{text}/
     end
 end

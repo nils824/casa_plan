@@ -1,0 +1,25 @@
+<% content_for :title, "Mein Profil – CasaPlan" %>
+
+<h1 class="page-title">Mein Profil</h1>
+
+<div class="card">
+  <dl class="grid grid-cols-[max-content_1fr] gap-x-6 gap-y-2">
+    <dt class="font-semibold">Name</dt>
+    <dd><%= @user.name %></dd>
+    <dt class="font-semibold">E-Mail-Adresse</dt>
+    <dd>
+      <%= @user.email_address %>
+      <% if @user.unconfirmed_email.present? %>
+        <br><span class="text-sm text-amber-700">Bestätigung ausstehend für <%= @user.unconfirmed_email %></span>
+      <% end %>
+    </dd>
+    <dt class="font-semibold">Rolle</dt>
+    <dd><%= @user.role_label %></dd>
+  </dl>
+</div>
+
+<div class="flex flex-wrap gap-3">
+  <%= link_to "Name ändern", edit_profile_path, class: "btn-secondary" %>
+  <%= link_to "Passwort ändern", edit_profile_password_path, class: "btn-secondary" %>
+  <%= link_to "E-Mail-Adresse ändern", edit_profile_email_path, class: "btn-secondary" %>
+</div>

@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_21_065341) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_21_120000) do
+  create_table "activities", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "event", null: false
+    t.integer "stay_id", null: false
+    t.string "summary", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["stay_id"], name: "index_activities_on_stay_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
+
   create_table "houses", force: :cascade do |t|
     t.integer "beds", null: false
     t.datetime "created_at", null: false
+    t.string "invitation_code"
     t.string "name", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,13 +62,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_21_065341) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email_address", null: false
+    t.string "email_confirmation_token"
     t.string "name", null: false
     t.string "password_digest", null: false
     t.string "role", default: "member", null: false
+    t.string "unconfirmed_email"
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["email_confirmation_token"], name: "index_users_on_email_confirmation_token", unique: true
   end
 
+  add_foreign_key "activities", "stays"
+  add_foreign_key "activities", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "stays", "houses"
   add_foreign_key "stays", "users"

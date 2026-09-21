@@ -1,0 +1,10 @@
+<% if record.errors.any? %>
+  <div id="error_explanation" class="mb-6 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-red-800">
+    <p class="font-semibold">Bitte korrigiere folgende Punkte:</p>
+    <ul class="list-disc ml-5">
+      <% record.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,9 +1,4 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-  beds: 1
-
-two:
-  name: MyString
-  beds: 1
+casa:
+  name: Casa Moghegno
+  beds: 6
+  invitation_code: moghegno-2026

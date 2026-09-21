@@ -66,3 +66,13 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# German translations for Rails default messages
+gem "rails-i18n", "~> 8.1"
+
+# Policy-based authorization
+gem "pundit"
+
+# json 3.x made JSON.parse's options keyword-only; ActiveSupport 8.1.3.1 still
+# passes them positionally, which breaks every encrypted cookie read.
+gem "json", "< 3"

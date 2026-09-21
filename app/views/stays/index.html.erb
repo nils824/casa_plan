@@ -1,0 +1,78 @@
+<% content_for :title, "Belegungsplan – CasaPlan" %>
+
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-3xl font-bold">Belegungsplan</h1>
+  <% if policy(Stay).create? %>
+    <%= link_to "Aufenthalt anfragen", new_stay_path, class: "btn-primary" %>
+  <% end %>
+</div>
+
+<% if @open_requests.present? %>
+  <section id="open_requests" class="card border-amber-300">
+    <h2 class="section-title"><%= pluralize(@open_requests.size, "offene Anfrage", plural: "offene Anfragen") %></h2>
+    <table class="table">
+      <thead>
+        <tr><th>Zeitraum</th><th>Partei</th><th>Personen</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% @open_requests.each do |stay| %>
+          <tr>
+            <td><%= stay.period_label %></td>
+            <td><%= stay.user.name %></td>
+            <td><%= stay.guests_count %></td>
+            <td><%= link_to "Entscheiden", stay, class: "link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+<% end %>
+
+<section id="plan" class="card">
+  <h2 class="section-title">Kommende Aufenthalte</h2>
+  <% if @plan.any? %>
+    <table class="table">
+      <thead>
+        <tr><th>Zeitraum</th><th>Nächte</th><th>Partei</th><th>Personen</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% @plan.each do |stay| %>
+          <tr id="<%= dom_id(stay) %>" class="<%= 'bg-teal-50' if stay.owned_by?(Current.user) %>">
+            <td><%= stay.period_label %></td>
+            <td><%= stay.nights %></td>
+            <td><%= stay.user.name %></td>
+            <td><%= stay.guests_count %></td>
+            <td><%= status_badge(stay) %></td>
+            <td><%= link_to "Details", stay, class: "link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p class="mt-3 text-sm text-stone-500">Nur bestätigte Aufenthalte blockieren das Haus. Deine eigenen Aufenthalte sind hervorgehoben.</p>
+  <% else %>
+    <p>Zurzeit sind keine Aufenthalte geplant. Das Haus ist frei.</p>
+  <% end %>
+</section>
+
+<section id="own_stays" class="card">
+  <h2 class="section-title">Meine Anfragen</h2>
+  <% if @own_stays.any? %>
+    <table class="table">
+      <thead>
+        <tr><th>Zeitraum</th><th>Personen</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody>
+        <% @own_stays.each do |stay| %>
+          <tr>
+            <td><%= stay.period_label %></td>
+            <td><%= stay.guests_count %></td>
+            <td><%= status_badge(stay) %></td>
+            <td><%= link_to "Details", stay, class: "link" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Du hast noch keine Aufenthalte angefragt.</p>
+  <% end %>
+</section>
