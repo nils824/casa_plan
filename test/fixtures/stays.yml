@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  house: one
+  user: one
+  decided_by: one
+  arrival_on: 2026-09-21
+  departure_on: 2026-09-21
+  guests_count: 1
+  status: MyString
+  note: MyText
+  rejection_reason: MyText
+  decided_at: 2026-09-21 08:53:40
+  lock_version: 1
+
+two:
+  house: two
+  user: two
+  decided_by: two
+  arrival_on: 2026-09-21
+  departure_on: 2026-09-21
+  guests_count: 1
+  status: MyString
+  note: MyText
+  rejection_reason: MyText
+  decided_at: 2026-09-21 08:53:40
+  lock_version: 1
