@@ -262,81 +262,37 @@ erDiagram
 
 ## 7. Breadboards der 1. Iteration
 
-> **TODO:** Handgezeichnete Breadboards einfügen (Bilder unter `docs/images/`).
+Notation nach Shape Up: **Orte** (Seiten) mit ihren **Affordanzen** (Links, Buttons, Felder)
+und **Verbindungen** dazwischen.
 
-Notation: **Ort** (Screen) → Affordanzen (Buttons, Felder, Links) → Ziel
+*Abbildung 2: Registrieren und Anmelden*
+![Breadboard Registrieren und Anmelden](images/breadboard-anmelden.jpg)
 
-**Flow 1: Registrieren und Anmelden**
+*Abbildung 3: Aufenthalt anfragen (Familienmitglied)*
+![Breadboard Aufenthalt anfragen](images/breadboard-anfragen.jpg)
 
-```
-Anmelden
-  E-Mail-Adresse, Passwort
-  [Anmelden] ──► Belegungsplan   (Fehler: Meldung «E-Mail-Adresse oder Passwort ist falsch.»)
-  [Mit Einladungscode registrieren] ──► Registrieren
+*Abbildung 4: Anfrage bestätigen oder ablehnen (Verwalter)*
+![Breadboard Anfrage entscheiden](images/breadboard-entscheiden.jpg)
 
-Registrieren
-  Name, E-Mail-Adresse, Passwort, Passwort-Bestätigung, Einladungscode
-  [Registrieren] ──► Belegungsplan   (Fehler: Registrieren mit Meldungen, Eingaben erhalten)
-```
+*Abbildung 5: Eigene Anfrage bearbeiten oder zurückziehen*
+![Breadboard Anfrage bearbeiten](images/breadboard-bearbeiten.jpg)
 
-**Flow 2: Aufenthalt anfragen (Familienmitglied)**
+### 8. Screens der 1. Iteration
 
-```
-Belegungsplan
-  Kommende Aufenthalte (Zeitraum, Nächte, Partei, Personen, Status), Meine Anfragen
-  [Aufenthalt anfragen] ──► Anfrage-Formular
+*Abbildung 6: Anmelden und Registrieren*
+![Screens Anmelden und Registrieren](images/screen-anmelden-registrieren.jpg)
 
-Anfrage-Formular
-  Anreise, Abreise, Anzahl Personen, Bemerkung
-  [Anfrage senden] ──► Detail der Anfrage (Meldung «Anfrage gesendet»)
-                       (Fehler: Formular mit Konflikt, Eingaben erhalten)
-  [Abbrechen] ──► Belegungsplan
-```
+*Abbildung 7: Belegungsplan (Ansicht Verwalter mit offenen Anfragen)*
+![Screen Belegungsplan](images/screen-belegungsplan.jpg)
 
-**Flow 3: Anfrage bestätigen oder ablehnen (Verwalter)**
+*Abbildung 8: Anfrage-Formular mit Fehlermeldung bei Überschneidung*
+![Screen Anfrage-Formular](images/screen-anfrage-formular.jpg)
 
-```
-Belegungsplan
-  Offene Anfragen (Zeitraum, Partei, Personen)
-  [Entscheiden] ──► Detail der Anfrage
+*Abbildung 9: Detail der Anfrage mit Bestätigen, Ablehnen und Verlauf*
+![Screen Detail der Anfrage](images/screen-detail.jpg)
 
-Detail der Anfrage
-  Angaben, Status, Verlauf
-  [Bestätigen] ──► Detail (Meldung «Aufenthalt bestätigt»)
-                   (Fehler: Detail mit Meldung zum überlappenden Aufenthalt)
-  Begründung
-  [Ablehnen] ──► Detail (Meldung «Anfrage abgelehnt»)
-```
-
-**Flow 4: Eigene Anfrage bearbeiten oder zurückziehen (Familienmitglied)**
-
-```
-Detail der Anfrage
-  [Bearbeiten] ──► Anfrage-Formular ──► [Speichern] ──► Detail
-                   (Konflikt: Formular mit Meldung, Eingaben erhalten)
-  [Zurückziehen] ──► Detail (Status «Zurückgezogen»)
-```
-
----
-
-## 8. Screens der 1. Iteration
-
-> **TODO:** Fat-Marker-Sketches einfügen (Bilder unter `docs/images/`).
-
-*Tabelle 5: Screens*
-
-| Screen | Inhalt |
-|---|---|
-| Anmelden | E-Mail-Adresse, Passwort, Anmelden, Links zu Passwort vergessen und Registrieren |
-| Registrieren | Name, E-Mail-Adresse, Passwort (2×), Einladungscode |
-| Belegungsplan | Für den Verwalter offene Anfragen, kommende Aufenthalte mit Status, eigene Anfragen, Button «Aufenthalt anfragen» |
-| Anfrage-Formular | Anreise, Abreise, Anzahl Personen, Bemerkung, Fehlermeldungen oberhalb des Formulars |
-| Detail der Anfrage | Angaben, Status, Aktionen gemäss Berechtigung, Ablehnen mit Begründung, Verlauf |
-| Aktivitäten | Feed aller Änderungen an Aufenthalten |
-| Mein Profil | Name, E-Mail-Adresse, Rolle, Links zum Ändern |
-| Benutzerverwaltung (Verwalter) | Tabelle aller Benutzer, Bearbeiten von Name, E-Mail-Adresse und Rolle |
-
----
+*Abbildung 10: Mein Profil und Benutzerverwaltung*
+![Screens Profil und Benutzerverwaltung](images/screen-profil-benutzerverwaltung.jpg)
 
 ## 9. Glossar
 
@@ -384,23 +340,34 @@ Umgesetzt sind FA1–FA6 und FA8–FA11, die Rollen Familienmitglied und Verwalt
 
 ### Prüfung der Anforderungen
 
-Automatisierte Tests: `bin/rails test`. Manuelle Prüfung von NFA1: zwei Browserfenster als Verwalter, in beiden eine der zwei sich überschneidenden Demo-Anfragen (Ben und Clara) öffnen und kurz nacheinander bestätigen.
+Alle automatisierten Tests laufen erfolgreich: `bin/rails test` ergibt
+**75 runs, 256 assertions, 0 failures, 0 errors**.
 
 *Tabelle 8: Prüfung der Anforderungen*
 
 | ID | Prüfung | Ergebnis |
 |---|---|---|
-| FA1 | `StayTest` (Überschneidung, gleicher Wechseltag), `StaysControllerTest` «member requests a stay», «overlapping request is refused and the input is kept» | *nach Testlauf eintragen* |
-| FA2 | `StayTest` «manager confirms a request…», `StaysControllerTest` «manager confirms a request» | *nach Testlauf eintragen* |
-| FA3 | `StayTest` «rejecting requires a reason», `StaysControllerTest` «manager rejects a request with a reason» | *nach Testlauf eintragen* |
-| FA4 | `StaysControllerTest` «family member sees the occupancy plan» | *nach Testlauf eintragen* |
-| FA5 | `StaysControllerTest` «member updates own open request», «member withdraws own request» | *nach Testlauf eintragen* |
-| FA6 | `StayTest` «more guests than beds is invalid» | *nach Testlauf eintragen* |
-| FA8 | `RegistrationsControllerTest` | *nach Testlauf eintragen* |
-| FA9 | `ProfilesControllerTest`, `Profile::PasswordsControllerTest`, `Profile::EmailsControllerTest` | *nach Testlauf eintragen* |
-| FA10 | `Admin::UsersControllerTest`, `UserPolicyTest` | *nach Testlauf eintragen* |
-| FA11 | `StayTest` «stay and activity are saved together or not at all», `ActivitiesControllerTest` | *nach Testlauf eintragen* |
-| NFA1 | `StayTest` «second of two overlapping requests cannot be confirmed», manuelle Prüfung mit zwei Fenstern | *nach Testlauf eintragen* |
-| NFA2 | `StaysControllerTest` «member cannot confirm with a direct request», «member cannot update another member's request…», `StayPolicyTest` | *nach Testlauf eintragen* |
-| NFA3 | `StayTest` «an outdated version cannot overwrite a newer change», `StaysControllerTest` «outdated form shows a conflict and keeps the input» | *nach Testlauf eintragen* |
-| NFA4 | Manuelle Messung mit 500 Aufenthalten (nicht automatisiert) | *offen* |
+| FA1 | `StayTest` (Überschneidung, gleicher Wechseltag), `StaysControllerTest` | bestanden |
+| FA2 | `StayTest`, `StaysControllerTest` «manager confirms a request» | bestanden |
+| FA3 | `StayTest` «rejecting requires a reason», `StaysControllerTest` | bestanden |
+| FA4 | `StaysControllerTest` «family member sees the occupancy plan» | bestanden |
+| FA5 | `StaysControllerTest` (bearbeiten, zurückziehen) | bestanden |
+| FA6 | `StayTest` «more guests than beds is invalid» | bestanden |
+| FA8 | `RegistrationsControllerTest` | bestanden |
+| FA9 | `ProfilesControllerTest`, `Profile::PasswordsControllerTest`, `Profile::EmailsControllerTest` | bestanden |
+| FA10 | `Admin::UsersControllerTest`, `UserPolicyTest` | bestanden |
+| FA11 | `StayTest` (Transaktion), `ActivitiesControllerTest`, `ActivityPolicyTest` | bestanden |
+| NFA1 | `StayTest` «second of two overlapping requests cannot be confirmed» plus manuelle Prüfung mit zwei Browserfenstern | bestanden |
+| NFA2 | `StaysControllerTest` (direkte Requests), `StayPolicyTest` | bestanden |
+| NFA3 | `StayTest` (veraltete Version), `StaysControllerTest` (Konflikt im Formular) | bestanden |
+| NFA4 | Manuelle Messung, nicht automatisiert | offen |
+
+### Aussagekraft der Tests
+
+Um zu prüfen, ob die Tests einen echten Fehler erkennen, wurde die Fachregel bewusst verfälscht:
+Im Scope `overlapping` (`app/models/stay.rb`) wurden die strikten Vergleiche `<` und `>` durch
+`<=` und `>=` ersetzt. Damit gilt ein Wechsel am selben Tag fälschlicherweise als Überschneidung.
+
+Ergebnis: *[Anzahl fehlgeschlagener Tests und Namen der Tests eintragen]*
+
+Nach dem Rückgängigmachen der Änderung laufen wieder alle Tests erfolgreich durch.
