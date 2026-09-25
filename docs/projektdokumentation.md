@@ -277,7 +277,7 @@ und **Verbindungen** dazwischen.
 *Abbildung 5: Eigene Anfrage bearbeiten oder zurückziehen*
 ![Breadboard Anfrage bearbeiten](images/breadboard-bearbeiten.png)
 
-### 8. Screens der 1. Iteration
+## 8. Screens der 1. Iteration
 
 *Abbildung 6: Anmelden und Registrieren*
 ![Screens Anmelden und Registrieren](images/screen-anmelden-registrieren.png)
@@ -293,6 +293,8 @@ und **Verbindungen** dazwischen.
 
 *Abbildung 10: Mein Profil und Benutzerverwaltung*
 ![Screens Profil und Benutzerverwaltung](images/screen-profil-benutzerverwaltung.png)
+
+---
 
 ## 9. Glossar
 
@@ -336,12 +338,11 @@ Umgesetzt sind FA1–FA6 und FA8–FA11, die Rollen Familienmitglied und Verwalt
 - Der Einladungscode kann nur über die Datenbank bzw. die Konsole geändert werden, nicht über die Oberfläche. Wird er weitergegeben, kann sich jede Person registrieren, die ihn kennt.
 - E-Mails werden in der Entwicklungsumgebung nur als Datei abgelegt (`tmp/mails/`).
 - Der Bestätigungslink für eine neue E-Mail-Adresse hat kein Ablaufdatum.
-- Breadboards und Fat-Marker-Sketches als Bilder einfügen.
 
 ### Prüfung der Anforderungen
 
 Alle automatisierten Tests laufen erfolgreich: `bin/rails test` ergibt
-**75 runs, 256 assertions, 0 failures, 0 errors**.
+**78 runs, 263 assertions, 0 failures, 0 errors**.
 
 *Tabelle 8: Prüfung der Anforderungen*
 
@@ -368,7 +369,7 @@ Um zu prüfen, ob die Tests einen echten Fehler erkennen, wurde die Fachregel be
 Im Scope `overlapping` (`app/models/stay.rb`) wurden die strikten Vergleiche `<` und `>` durch
 `<=` und `>=` ersetzt. Damit gilt ein Wechsel am selben Tag fälschlicherweise als Überschneidung.
 
-*Abbildung 11: Ergebnis der Tests*
+*Abbildung 11: Zwei Tests schlagen fehl, «arrival on the departure day of a confirmed stay is allowed» und «departure on the arrival day of a confirmed stay is allowed» (78 runs, 2 failures). Die Tests erkennen die verletzte Fachregel also zuverlässig.*
 
 ![Fehlgeschlagener Test](images/test_fail.png)
 
