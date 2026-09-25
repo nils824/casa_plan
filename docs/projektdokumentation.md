@@ -266,33 +266,33 @@ Notation nach Shape Up: **Orte** (Seiten) mit ihren **Affordanzen** (Links, Butt
 und **Verbindungen** dazwischen.
 
 *Abbildung 2: Registrieren und Anmelden*
-![Breadboard Registrieren und Anmelden](images/breadboard-anmelden.jpg)
+![Breadboard Registrieren und Anmelden](images/breadboard-anmelden.png)
 
 *Abbildung 3: Aufenthalt anfragen (Familienmitglied)*
-![Breadboard Aufenthalt anfragen](images/breadboard-anfragen.jpg)
+![Breadboard Aufenthalt anfragen](images/breadboard-anfragen.png)
 
 *Abbildung 4: Anfrage bestätigen oder ablehnen (Verwalter)*
-![Breadboard Anfrage entscheiden](images/breadboard-entscheiden.jpg)
+![Breadboard Anfrage entscheiden](images/breadboard-entscheiden.png)
 
 *Abbildung 5: Eigene Anfrage bearbeiten oder zurückziehen*
-![Breadboard Anfrage bearbeiten](images/breadboard-bearbeiten.jpg)
+![Breadboard Anfrage bearbeiten](images/breadboard-bearbeiten.png)
 
 ### 8. Screens der 1. Iteration
 
 *Abbildung 6: Anmelden und Registrieren*
-![Screens Anmelden und Registrieren](images/screen-anmelden-registrieren.jpg)
+![Screens Anmelden und Registrieren](images/screen-anmelden-registrieren.png)
 
 *Abbildung 7: Belegungsplan (Ansicht Verwalter mit offenen Anfragen)*
-![Screen Belegungsplan](images/screen-belegungsplan.jpg)
+![Screen Belegungsplan](images/screen-belegungsplan.png)
 
 *Abbildung 8: Anfrage-Formular mit Fehlermeldung bei Überschneidung*
-![Screen Anfrage-Formular](images/screen-anfrage-formular.jpg)
+![Screen Anfrage-Formular](images/screen-anfrage-formular.png)
 
 *Abbildung 9: Detail der Anfrage mit Bestätigen, Ablehnen und Verlauf*
-![Screen Detail der Anfrage](images/screen-detail.jpg)
+![Screen Detail der Anfrage](images/screen-detail.png)
 
 *Abbildung 10: Mein Profil und Benutzerverwaltung*
-![Screens Profil und Benutzerverwaltung](images/screen-profil-benutzerverwaltung.jpg)
+![Screens Profil und Benutzerverwaltung](images/screen-profil-benutzerverwaltung.png)
 
 ## 9. Glossar
 
@@ -368,6 +368,8 @@ Um zu prüfen, ob die Tests einen echten Fehler erkennen, wurde die Fachregel be
 Im Scope `overlapping` (`app/models/stay.rb`) wurden die strikten Vergleiche `<` und `>` durch
 `<=` und `>=` ersetzt. Damit gilt ein Wechsel am selben Tag fälschlicherweise als Überschneidung.
 
-Ergebnis: *[Anzahl fehlgeschlagener Tests und Namen der Tests eintragen]*
+*Abbildung 11: Ergebnis der Tests*
+
+![Fehlgeschlagener Test](images/test_fail.png)
 
 Nach dem Rückgängigmachen der Änderung laufen wieder alle Tests erfolgreich durch.
